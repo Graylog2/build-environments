@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DOCKER_HOST=${DOCKER_HOST:-'tcp://localhost:4243'}
+export DOCKER_HOST=${DOCKER_HOST:-'unix:///var/run/docker.sock'}
 
 for DISTRIBUTION in */
 do
