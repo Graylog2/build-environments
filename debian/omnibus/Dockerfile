@@ -4,11 +4,22 @@ MAINTAINER Marius Sturm <hello@torch.sh>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
-    apt-get install -y curl git build-essential && \
+    apt-get -y upgrade
+
+RUN apt-get install -y openssh-server && \
+    sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
+    mkdir -p /var/run/sshd
+
+RUN apt-get install -y openjdk-7-jdk && \
+    adduser --quiet jenkins && \
+    echo "jenkins:jenkins" | chpasswd
+
+RUN apt-get install -y curl git build-essential && \
     apt-get install -y ruby1.9.1-full
 RUN gem install --no-rdoc --no-ri bundler
 RUN mkdir /workspace
 
 VOLUME /workspace
+EXPOSE 22
 
-CMD ["/bin/bash"]
+CMD ["/usr/sbin/sshd", "-D"]
