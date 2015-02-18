@@ -10,7 +10,12 @@ RUN apt-get install -y openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd
 
-RUN apt-get install -y openjdk-7-jdk sudo && \
+RUN apt-get install -y sudo && \
+    echo %jenkins ALL=NOPASSWD:ALL > /etc/sudoers.d/jenkins && \
+    chmod 0440 /etc/sudoers.d/jenkins && \
+    usermod -a -G sudo jenkins
+
+RUN apt-get install -y openjdk-7-jdk && \
     adduser --quiet jenkins && \
     echo "jenkins:jenkins" | chpasswd
 
