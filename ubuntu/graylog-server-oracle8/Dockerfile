@@ -5,7 +5,19 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y wget git
+    apt-get install -y apt-utils wget git
+
+RUN apt-get install -y openssh-server && \
+    sed -i 's|session required pam_loginuid.so|session optional pam_loginuid.so|g' /etc/pam.d/sshd && \
+    mkdir -p /var/run/sshd
+
+RUN groupadd -r jenkins && \
+    useradd -m -r -g jenkins jenkins
+RUN echo "jenkins:jenkins" | chpasswd
+RUN apt-get install -y sudo && \
+    echo "%jenkins ALL=NOPASSWD:ALL" > /etc/sudoers.d/jenkins && \
+    chmod 0440 /etc/sudoers.d/jenkins && \
+    usermod -a -G sudo jenkins
 
 RUN apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:webupd8team/java && \
@@ -23,5 +35,6 @@ RUN mkdir /workspace
 RUN mkdir /root/.m2
 VOLUME /workspace
 VOLUME /root/.m2
+EXPOSE 22
 
-CMD ["/bin/bash"]
+CMD ["/usr/sbin/sshd", "-D"]

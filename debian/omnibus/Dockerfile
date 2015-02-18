@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y apt-utils
+    apt-get install -y apt-utils curl git build-essential ruby1.9.1-full
 
 RUN apt-get install -y openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
@@ -21,11 +21,9 @@ RUN apt-get install -y sudo && \
     chmod 0440 /etc/sudoers.d/jenkins && \
     usermod -a -G sudo jenkins
 
-RUN apt-get install -y curl git build-essential && \
-    apt-get install -y ruby1.9.1-full
 RUN gem install --no-rdoc --no-ri bundler
-RUN mkdir /workspace
 
+RUN mkdir /workspace
 VOLUME /workspace
 EXPOSE 22
 
