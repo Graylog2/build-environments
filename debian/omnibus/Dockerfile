@@ -4,15 +4,17 @@ MAINTAINER Marius Sturm <hello@torch.sh>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
-    apt-get -y upgrade
+    apt-get -y upgrade && \
+    apt-get install -y apt-utils
 
 RUN apt-get install -y openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd
 
-RUN apt-get install -y openjdk-7-jdk && \
-    adduser --quiet jenkins && \
-    echo "jenkins:jenkins" | chpasswd
+RUN apt-get install -y openjdk-7-jdk
+RUN groupadd -r jenkins && \
+    useradd -r -g jenkins jenkins
+RUN echo "jenkins:jenkins" | chpasswd
 
 RUN apt-get install -y sudo && \
     echo "%jenkins ALL=NOPASSWD:ALL" > /etc/sudoers.d/jenkins && \
