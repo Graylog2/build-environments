@@ -13,7 +13,7 @@ RUN apt-get install -y openssh-server && \
 
 RUN apt-get install -y openjdk-7-jdk
 RUN groupadd -r jenkins && \
-    useradd -r -g jenkins jenkins
+    useradd -m -r -g jenkins jenkins
 RUN echo "jenkins:jenkins" | chpasswd
 
 RUN apt-get install -y sudo && \
