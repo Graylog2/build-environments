@@ -31,7 +31,10 @@ RUN apt-get install -y software-properties-common && \
     mv activator-1.2.10-minimal /usr/local/activator && \
     chmod a+x /usr/local/activator/activator && \
     ln -s /usr/local/activator/activator /usr/local/bin/ && \
-    apt-get install -y phantomjs
+    apt-get install -y phantomjs && \
+    add-apt-repository "deb http://dl.bintray.com/sbt/debian /" && \
+    apt-get update && \
+    apt-get install -y --force-yes sbt
 
 RUN mkdir /workspace
 VOLUME /workspace
