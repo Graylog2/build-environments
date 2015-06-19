@@ -25,18 +25,30 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
     apt-get update && \
     apt-get install -y mongodb-org=3.0.2 mongodb-org-server=3.0.2 mongodb-org-shell=3.0.2 mongodb-org-mongos=3.0.2 mongodb-org-tools=3.0.2
 
-RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.1.deb && \
+RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.6.0.deb && \
     dpkg -i /tmp/elasticsearch.deb && \
     rm /tmp/elasticsearch.deb
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 
 RUN mkdir /etc/service/nsv && \
     mkdir /etc/service/mongodb && \
-    mkdir /etc/service/elasticsearch
+    mkdir /etc/service/elasticsearch && \
+    mkdir /etc/service/graylog-server && \
+    mkdir -p /opt/graylog/data/journal
 
 ADD nsv.py /etc/service/nsv/run
 ADD mongodb.run /etc/service/mongodb/run
 ADD elasticsearch.run /etc/service/elasticsearch/run
-RUN chmod +x /etc/service/nsv/run /etc/service/mongodb/run /etc/service/elasticsearch/run
+ADD graylog-server.run /etc/service/graylog-server/run
+ADD graylog.conf /opt/graylog/graylog.conf
+ADD run.sh /opt/graylog/run.sh
+RUN chmod +x /etc/service/nsv/run /etc/service/mongodb/run /etc/service/elasticsearch/run /etc/service/graylog-server/run /opt/graylog/run.sh
+
+VOLUME /opt/graylog/assembly
+
+EXPOSE 12900
+EXPOSE 27017
+EXPOSE 5000
 
 CMD ["/bin/bash"]
+ENTRYPOINT ["/opt/graylog/run.sh"]
