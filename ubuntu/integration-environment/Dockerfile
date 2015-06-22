@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y wget git
+    apt-get install -y wget curl git
 
 RUN apt-get install -y openssh-server && \
     sed -i 's|session required pam_loginuid.so|session optional pam_loginuid.so|g' /etc/pam.d/sshd && \
@@ -49,8 +49,7 @@ RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/ela
     rm /tmp/elasticsearch.deb
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 
-RUN mkdir /etc/service/ssh && \
-    mkdir /etc/service/nsv && \
+RUN mkdir /etc/service/nsv && \
     mkdir /etc/service/mongodb && \
     mkdir /etc/service/elasticsearch && \
     mkdir /etc/service/graylog-server && \
