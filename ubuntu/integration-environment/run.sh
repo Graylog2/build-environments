@@ -16,7 +16,7 @@ tar xzvfC $LATEST /opt/graylog/server --strip 1
 /sbin/my_init &
 
 echo "Waiting for Graylog server"
-until $(curl --output /dev/null --silent --head --fail http://localhost:12900); do
+until $(curl --output /dev/null --silent --head --fail http://localhost:12900/api-browser); do
     printf '.'
     sleep 5
 done
