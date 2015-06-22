@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LATEST=`ls -t /opt/graylog/assembly/graylog-* | head -n1`
+LATEST=`ls -t $1/graylog-* | head -n1`
 
 if [ ! -f "$LATEST" ]
 then
@@ -13,4 +13,10 @@ fi
 mkdir -p /opt/graylog/server
 tar xzvfC $LATEST /opt/graylog/server --strip 1
 
-/sbin/my_init
+/sbin/my_init &
+
+echo "Waiting for Graylog server"
+until $(curl --output /dev/null --silent --head --fail http://localhost:12900); do
+    printf '.'
+    sleep 5
+done

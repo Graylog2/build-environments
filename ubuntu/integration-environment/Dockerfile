@@ -56,7 +56,6 @@ RUN mkdir /etc/service/ssh && \
     mkdir /etc/service/graylog-server && \
     mkdir -p /opt/graylog/data/journal
 
-ADD sshd.run /etc/service/ssh/run
 ADD nsv.py /etc/service/nsv/run
 ADD mongodb.run /etc/service/mongodb/run
 ADD elasticsearch.run /etc/service/elasticsearch/run
