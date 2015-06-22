@@ -9,7 +9,8 @@ RUN apt-get update && \
 
 RUN apt-get install -y openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
-    mkdir -p /var/run/sshd
+    mkdir -p /var/run/sshd && \
+    dpkg-reconfigure openssh-server
 
 RUN apt-get install -y openjdk-7-jdk
 RUN groupadd -r jenkins && \

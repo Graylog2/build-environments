@@ -71,4 +71,4 @@ VOLUME /workspace
 VOLUME /root/.m2
 EXPOSE 22
 
-CMD ["/opt/graylog/run.sh"]
+CMD ["/usr/sbin/sshd", "-D"]
