@@ -37,8 +37,13 @@ RUN apt-get install -y software-properties-common && \
     apt-get update && \
     apt-get install -y --force-yes sbt
 
-RUN mkdir /workspace
-VOLUME /workspace
+RUN mkdir /home/jenkins/workspace
+RUN mkdir /home/jenkins/.m2
+RUN CHOWN -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
+
+VOLUME /home/jenkins/workspace
+VOLUME /home/jenkins/.m2
+
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]

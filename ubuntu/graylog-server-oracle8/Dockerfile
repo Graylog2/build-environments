@@ -32,10 +32,13 @@ RUN apt-get install -y software-properties-common && \
     tar -zxf apache-maven-3.2.5-bin.tar.gz -C /usr/local/maven --strip-components=1 && \
     ln -s /usr/local/maven/bin/mvn /usr/bin/mvn
 
-RUN mkdir /workspace
-RUN mkdir /root/.m2
-VOLUME /workspace
-VOLUME /root/.m2
+RUN mkdir /home/jenkins/workspace
+RUN mkdir /home/jenkins/.m2
+RUN CHOWN -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
+
+VOLUME /home/jenkins/workspace
+VOLUME /home/jenkins/.m2
+
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
