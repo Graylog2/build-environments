@@ -67,7 +67,7 @@ RUN chmod +x /etc/service/nsv/run /etc/service/mongodb/run /etc/service/elastics
 
 RUN mkdir /home/jenkins/workspace
 RUN mkdir /home/jenkins/.m2
-RUN CHOWN -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
+RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
 
 VOLUME /home/jenkins/workspace
 VOLUME /home/jenkins/.m2

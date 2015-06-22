@@ -39,7 +39,7 @@ RUN apt-get install -y software-properties-common && \
 
 RUN mkdir /home/jenkins/workspace
 RUN mkdir /home/jenkins/.m2
-RUN CHOWN -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
+RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
 
 VOLUME /home/jenkins/workspace
 VOLUME /home/jenkins/.m2
