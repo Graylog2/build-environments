@@ -39,10 +39,14 @@ RUN apt-get install -y software-properties-common && \
 
 RUN mkdir /home/jenkins/workspace
 RUN mkdir /home/jenkins/.m2
-RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
+RUN mkdir /home/jenkins/.ivy2
+RUN mkdir /home/jenkins/.npm
+RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2 /home/jenkins/.ivy2 /home/jenkins/.npm
 
 VOLUME /home/jenkins/workspace
 VOLUME /home/jenkins/.m2
+VOLUME /home/jenkins/.ivy2
+VOLUME /home/jenkins/.npm
 
 EXPOSE 22
 
