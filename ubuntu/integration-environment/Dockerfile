@@ -53,7 +53,8 @@ RUN mkdir /etc/service/nsv && \
     mkdir /etc/service/mongodb && \
     mkdir /etc/service/elasticsearch && \
     mkdir /etc/service/graylog-server && \
-    mkdir -p /opt/graylog/data/journal
+    mkdir -p /opt/graylog/data/journal && \
+    mkdir /opt/graylog/assembly
 
 ADD nsv.py /etc/service/nsv/run
 ADD mongodb.run /etc/service/mongodb/run
