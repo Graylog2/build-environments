@@ -49,20 +49,18 @@ RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/ela
     rm /tmp/elasticsearch.deb
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 
-RUN mkdir /etc/service/nsv && \
-    mkdir /etc/service/mongodb && \
+RUN mkdir /etc/service/mongodb && \
     mkdir /etc/service/elasticsearch && \
     mkdir /etc/service/graylog-server && \
     mkdir -p /opt/graylog/data/journal && \
     mkdir /opt/graylog/assembly
 
-ADD nsv.py /etc/service/nsv/run
 ADD mongodb.run /etc/service/mongodb/run
 ADD elasticsearch.run /etc/service/elasticsearch/run
 ADD graylog-server.run /etc/service/graylog-server/run
 ADD graylog.conf /opt/graylog/graylog.conf
 ADD run.sh /opt/graylog/run.sh
-RUN chmod +x /etc/service/nsv/run /etc/service/mongodb/run /etc/service/elasticsearch/run /etc/service/graylog-server/run /opt/graylog/run.sh
+RUN chmod +x /etc/service/mongodb/run /etc/service/elasticsearch/run /etc/service/graylog-server/run /opt/graylog/run.sh
 
 RUN mkdir /home/jenkins/workspace
 RUN mkdir /home/jenkins/.m2
