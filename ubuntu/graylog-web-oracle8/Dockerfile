@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER Marius Sturm <hello@torch.sh>
+MAINTAINER Marius Sturm <hello@graylog.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
