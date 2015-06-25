@@ -23,7 +23,6 @@ RUN apt-get install -y sudo && \
     usermod -a -G sudo jenkins
 
 RUN gem install --no-rdoc --no-ri bundler
-
 RUN mkdir /home/jenkins/workspace
 
 VOLUME /home/jenkins/workspace
