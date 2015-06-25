@@ -24,8 +24,8 @@ RUN apt-get install -y sudo && \
 
 RUN gem install --no-rdoc --no-ri bundler
 
-RUN mkdir /workspace
-VOLUME /workspace
+RUN mkdir /home/jenkins/workspace
+VOLUME /home/jenkins/workspace
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
