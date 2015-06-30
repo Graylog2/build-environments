@@ -26,7 +26,7 @@ RUN apt-get install -y software-properties-common && \
     curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
     apt-get install -y nodejs && \
-    npm install -g npm@2.1.18 && \
+    npm install -g npm@2.12.0 && \
     wget http://downloads.typesafe.com/typesafe-activator/1.2.10/typesafe-activator-1.2.10-minimal.zip && \
     unzip typesafe-activator-1.2.10-minimal.zip && \
     mv activator-1.2.10-minimal /usr/local/activator && \
