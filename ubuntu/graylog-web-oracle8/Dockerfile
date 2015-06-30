@@ -26,12 +26,7 @@ RUN apt-get install -y software-properties-common && \
     curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
     apt-get install -y nodejs && \
-    npm install -g npm@2.12.0 && \
-    wget http://downloads.typesafe.com/typesafe-activator/1.2.10/typesafe-activator-1.2.10-minimal.zip && \
-    unzip typesafe-activator-1.2.10-minimal.zip && \
-    mv activator-1.2.10-minimal /usr/local/activator && \
-    chmod a+x /usr/local/activator/activator && \
-    ln -s /usr/local/activator/activator /usr/local/bin/ && \
+    npm install -g npm@latest && \
     apt-get install -y phantomjs && \
     add-apt-repository "deb http://dl.bintray.com/sbt/debian /" && \
     apt-get update && \
@@ -40,13 +35,11 @@ RUN apt-get install -y software-properties-common && \
 RUN mkdir /home/jenkins/workspace
 RUN mkdir /home/jenkins/.m2
 RUN mkdir /home/jenkins/.ivy2
-RUN mkdir /home/jenkins/.npm
-RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2 /home/jenkins/.ivy2 /home/jenkins/.npm
+RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2 /home/jenkins/.ivy2
 
 VOLUME /home/jenkins/workspace
 VOLUME /home/jenkins/.m2
 VOLUME /home/jenkins/.ivy2
-VOLUME /home/jenkins/.npm
 
 EXPOSE 22
 
