@@ -27,7 +27,9 @@ RUN apt-get install -y software-properties-common && \
     apt-get update && \
     apt-get install -y nodejs && \
     npm install -g npm@latest && \
-    apt-get install -y phantomjs && \
+    wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 && \
+    tar xjvf /tmp/phantomjs.tar.bz2 --strip-components=2 -C /usr/local/bin phantomjs-1.9.8-linux-x86_64/bin/phantomjs && \
+    rm -f /tmp/phantomjs.tar.bz2 && \
     add-apt-repository "deb http://dl.bintray.com/sbt/debian /" && \
     apt-get update && \
     apt-get install -y --force-yes sbt
