@@ -62,6 +62,11 @@ ADD graylog.conf /opt/graylog/graylog.conf
 ADD run.sh /opt/graylog/run.sh
 RUN chmod +x /etc/service/mongodb/run /etc/service/elasticsearch/run /etc/service/graylog-server/run /opt/graylog/run.sh
 
+RUN rm -rf /etc/service/ssh
+RUN rm -rf /etc/service/syslog-ng
+RUN rm -rf /etc/service/syslog-forwarder
+RUN rm -rf /etc/service/cron
+
 RUN mkdir /home/jenkins/workspace
 RUN mkdir /home/jenkins/.m2
 RUN chown -R jenkins.jenkins /home/jenkins/workspace /home/jenkins/.m2
