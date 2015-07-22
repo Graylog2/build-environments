@@ -60,7 +60,8 @@ ADD elasticsearch.run /etc/service/elasticsearch/run
 ADD graylog-server.run /etc/service/graylog-server/run
 ADD graylog.conf /opt/graylog/graylog.conf
 ADD run.sh /opt/graylog/run.sh
-RUN chmod +x /etc/service/mongodb/run /etc/service/elasticsearch/run /etc/service/graylog-server/run /opt/graylog/run.sh
+ADD stop.sh /opt/graylog/stop.sh
+RUN chmod +x /etc/service/mongodb/run /etc/service/elasticsearch/run /etc/service/graylog-server/run /opt/graylog/run.sh /opt/graylog/stop.sh
 
 RUN rm -rf /etc/service/sshd
 RUN rm -rf /etc/service/syslog-ng
