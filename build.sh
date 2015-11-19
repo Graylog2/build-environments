@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -e
 export DOCKER_HOST=${DOCKER_HOST:-'unix:///var/run/docker.sock'}
 
 for DISTRIBUTION in */
