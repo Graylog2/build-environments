@@ -1,4 +1,4 @@
 #!/bin/sh
 
 exec 2>&1
-exec chpst -u mongodb:mongodb /usr/bin/mongod --dbpath /var/lib/mongodb --bind_ip 0.0.0.0 --smallfiles
+exec chpst -u mongodb:mongodb /usr/bin/mongod --dbpath /var/lib/mongodb --bind_ip 127.0.0.1 --smallfiles

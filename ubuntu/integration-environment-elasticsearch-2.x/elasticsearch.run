@@ -19,9 +19,7 @@ PID_FILE=/var/run/$NAME.pid
 DAEMON=$ES_HOME/bin/elasticsearch
 DAEMON_OPTS="-d -p $PID_FILE -Dconfig=$CONF_FILE -Des.path.home=$ES_HOME -Des.path.logs=$LOG_DIR -Des.path.data=$DATA_DIR -Des.path.work=$WORK_DIR -Des.path.conf=$CONF_DIR"
 
-JDK_DIRS="/usr/lib/jvm/java-8-oracle/ /usr/lib/jvm/j2sdk1.8-oracle/ /usr/lib/jvm/jdk-7-oracle-x64 /usr/lib/jvm/java-7-oracle /u
-sr/lib/jvm/j2sdk1.7-oracle/ /usr/lib/jvm/java-7-openjdk /usr/lib/jvm/java-7-openjdk-amd64/ /usr/lib/jvm/java-7-openjdk-armhf /u
-sr/lib/jvm/java-7-openjdk-i386/ /usr/lib/jvm/default-java"
+JDK_DIRS="/usr/lib/jvm/java-8-oracle /usr/lib/jvm/j2sdk1.8-oracle /usr/lib/jvm/default-java"
 
 . /lib/lsb/init-functions
 
