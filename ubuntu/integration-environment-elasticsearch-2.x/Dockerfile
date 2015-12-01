@@ -21,7 +21,7 @@ RUN apt-get update && \
     apt-get install -y python-pip && \
     pip install supervise && \
     pip install Flask && \
-    rm -rf /etc/service/{sshd,syslog-ng,syslog-forwarder,cron} && \
+    rm -rf /etc/service/sshd /etc/service/syslog-ng /etc/service/syslog-forwarder /etc/service/cron && \
     add-apt-repository -y ppa:webupd8team/java && \
     add-apt-repository "deb https://dl.bintray.com/sbt/debian /" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
@@ -43,9 +43,9 @@ RUN apt-get update && \
     tar -zxf /tmp/maven.tar.gz -C /usr/local/maven --strip-components=1 && \
     ln -s /usr/local/maven/bin/mvn /usr/bin/mvn && \
     rm -f /tmp/maven.tar.gz && \
-    mkdir /home/jenkins/{.m2,workspace} && \
-    chown -R jenkins.jenkins /home/jenkins/{.m2,workspace} && \
-    mkdir -p /etc/service/{elasticsearch,graylog-server,mongodb} && \
+    mkdir /home/jenkins/.m2 /home/jenkins/workspace && \
+    chown -R jenkins.jenkins /home/jenkins/.m2 /home/jenkins/workspace && \
+    mkdir -p /etc/service/elasticsearch /etc/service/graylog-server /etc/service/mongodb && \
     mkdir -p /opt/graylog/data/journal /opt/graylog/assembly
 
 ADD mongodb.run /etc/service/mongodb/run
