@@ -18,4 +18,4 @@ until mongo --quiet ping.js > /dev/null; do
 done
 echo ''
 
-exec java -Djava.library.path=/opt/graylog/lib/sigar $JAVA_OPTS -jar /opt/graylog/server/graylog.jar server -f /opt/graylog/graylog.conf -np
+exec java -Djava.library.path=/opt/graylog/lib/sigar $JAVA_OPTS -jar /opt/graylog/server/graylog.jar server --local -f /opt/graylog/graylog.conf -np
