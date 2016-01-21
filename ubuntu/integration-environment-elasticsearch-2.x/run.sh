@@ -6,7 +6,7 @@ then
   exit 1
 fi
 
-LATEST=`ls -t $1/graylog-* | head -n1`
+LATEST=`ls -t $1/graylog-*-graylog-server-tarball.tar.gz | head -n1`
 
 if [ ! -f "$LATEST" ]
 then
@@ -17,7 +17,7 @@ then
 fi
 
 mkdir -p /opt/graylog/server
-tar xzvfC $LATEST /opt/graylog/server --strip 1
+tar -xzvf "$LATEST" -C /opt/graylog/server
 
 /sbin/my_init --no-kill-all-on-exit &
 
