@@ -4,7 +4,7 @@ MAINTAINER Marius Sturm <hello@graylog.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV MAVEN_VERSION 3.3.9
 ENV MONGODB_VERSION 3.0.7
-ENV ELASTICSEARCH_VERSION 2.1.0
+ENV ELASTICSEARCH_VERSION 2.1.1
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
