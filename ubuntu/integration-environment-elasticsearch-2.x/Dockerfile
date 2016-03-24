@@ -48,6 +48,7 @@ RUN apt-get update && \
     mkdir -p /etc/service/elasticsearch /etc/service/graylog-server /etc/service/mongodb && \
     mkdir -p /opt/graylog/data/journal /opt/graylog/assembly
 
+RUN apt-get install -y libfontconfig1
 COPY phantomjs /usr/local/bin/
 RUN chmod +x /usr/local/bin/phantomjs
 
