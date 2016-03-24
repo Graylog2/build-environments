@@ -48,6 +48,9 @@ RUN apt-get update && \
     mkdir -p /etc/service/elasticsearch /etc/service/graylog-server /etc/service/mongodb && \
     mkdir -p /opt/graylog/data/journal /opt/graylog/assembly
 
+COPY /usr/share/phantomjs/latest/bin/phantomjs /usr/local/bin/
+RUN chmod +x /usr/local/bin/phantomjs
+
 ADD mongodb.run /etc/service/mongodb/run
 ADD elasticsearch.run /etc/service/elasticsearch/run
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
