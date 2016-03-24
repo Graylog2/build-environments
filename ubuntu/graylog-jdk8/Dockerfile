@@ -26,12 +26,9 @@ RUN apt-get update && \
     wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     apt-get update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
-    apt-get install -y --force-yes oracle-java8-installer sbt docker-engine nodejs phantomjs && \
+    apt-get install -y --force-yes oracle-java8-installer sbt docker-engine nodejs && \
     update-java-alternatives -s java-8-oracle && \
     npm install -g npm@latest && \
-    wget -qO /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 && \
-    tar -xjvf /tmp/phantomjs.tar.bz2 --overwrite --strip-components=2 -C /usr/bin phantomjs-1.9.8-linux-x86_64/bin/phantomjs && \
-    rm -f /tmp/phantomjs.tar.bz2 && \
     wget -qO /tmp/maven.tar.gz http://artfiles.org/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && \
     mkdir /usr/local/maven && \
     tar -zxf /tmp/maven.tar.gz -C /usr/local/maven --strip-components=1 && \
@@ -39,6 +36,10 @@ RUN apt-get update && \
     rm -f /tmp/maven.tar.gz && \
     mkdir /home/jenkins/{.ivy2,.m2,.sbt,workspace} && \
     chown -R jenkins.jenkins /home/jenkins/{.ivy2,.m2,.sbt,workspace}
+
+RUN apt-get install -y libfontconfig1
+COPY phantomjs /usr/local/bin/
+RUN chmod +x /usr/local/bin/phantomjs
 
 VOLUME /home/jenkins/workspace
 VOLUME /home/jenkins/.m2
