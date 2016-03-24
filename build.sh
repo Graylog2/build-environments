@@ -12,7 +12,7 @@ do
   do
     for file in "${files[@]}"
     do
-      cp "$file" .
+      cp ${file} "${DISTRIBUTION}/${CONTAINER_NAME}/"
     done
     if [ -d "${CONTAINER_NAME}" ]; then
       LEGACY_ID=$(docker images | grep $CONTAINER_NAME | awk '{print $3}')
