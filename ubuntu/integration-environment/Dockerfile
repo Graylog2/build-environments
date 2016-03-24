@@ -49,7 +49,7 @@ RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/ela
     rm /tmp/elasticsearch.deb
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 
-COPY /usr/share/phantomjs/latest/bin/phantomjs /usr/local/bin/
+COPY phantomjs /usr/local/bin/
 RUN chmod +x /usr/local/bin/phantomjs
 
 RUN mkdir /etc/service/mongodb && \
