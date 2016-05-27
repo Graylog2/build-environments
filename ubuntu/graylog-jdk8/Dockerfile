@@ -6,7 +6,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre/bin/java
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y apt-utils wget git openssh-server sudo liberror-perl git build-essential autoconf libssl-dev python software-properties-common apt-transport-https && \
+    apt-get install -y apt-utils wget git openssh-server sudo liberror-perl git build-essential autoconf libssl-dev python software-properties-common apt-transport-https rpm && \
     sed -i 's|session required pam_loginuid.so|session optional pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
     dpkg-reconfigure openssh-server && \
