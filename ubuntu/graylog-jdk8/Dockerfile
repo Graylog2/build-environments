@@ -16,6 +16,7 @@ RUN apt-get update && \
     echo "%jenkins ALL=NOPASSWD:ALL" > /etc/sudoers.d/jenkins && \
     chmod 0440 /etc/sudoers.d/jenkins && \
     usermod -a -G sudo jenkins && \
+    apt-get install -y --reinstall ca-certificates && \
     add-apt-repository -y ppa:webupd8team/java && \
     add-apt-repository "deb https://dl.bintray.com/sbt/debian /" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \

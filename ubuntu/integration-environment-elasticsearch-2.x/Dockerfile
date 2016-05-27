@@ -22,6 +22,7 @@ RUN apt-get update && \
     pip install supervise && \
     pip install Flask && \
     rm -rf /etc/service/sshd /etc/service/syslog-ng /etc/service/syslog-forwarder /etc/service/cron && \
+    apt-get install -y --reinstall ca-certificates && \
     add-apt-repository -y ppa:webupd8team/java && \
     add-apt-repository "deb https://dl.bintray.com/sbt/debian /" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
