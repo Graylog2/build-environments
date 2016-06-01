@@ -45,7 +45,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
     apt-get update && \
     apt-get install -y mongodb-org=3.0.7 mongodb-org-server=3.0.7 mongodb-org-shell=3.0.7 mongodb-org-mongos=3.0.7 mongodb-org-tools=3.0.7
 
-RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb && \
+RUN wget -O /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.deb && \
     dpkg -i /tmp/elasticsearch.deb && \
     rm /tmp/elasticsearch.deb
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
