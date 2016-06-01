@@ -1,0 +1,41 @@
+#!/bin/sh
+
+exec 2>&1
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+NAME=elasticsearch
+DESC="Elasticsearch Server"
+DEFAULT=/etc/default/$NAME
+ES_USER=elasticsearch
+ES_GROUP=elasticsearch
+ES_HOME=/usr/share/$NAME
+MAX_OPEN_FILES=65535
+LOG_DIR=/var/log/$NAME
+DATA_DIR=/var/lib/$NAME
+WORK_DIR=/tmp/$NAME
+CONF_DIR=/etc/$NAME
+PID_FILE=/var/run/$NAME/$NAME.pid
+DAEMON=$ES_HOME/bin/elasticsearch
+DAEMON_OPTS="-p $PID_FILE --default.path.home=$ES_HOME --default.path.logs=$LOG_DIR --default.path.data=$DATA_DIR --default.path.conf=$CONF_DIR"
+
+JDK_DIRS="/usr/lib/jvm/java-8-oracle /usr/lib/jvm/j2sdk1.8-oracle /usr/lib/jvm/default-java"
+
+. /lib/lsb/init-functions
+
+for jdir in $JDK_DIRS; do
+    if [ -r "$jdir/bin/java" -a -z "${JAVA_HOME}" ]; then
+        JAVA_HOME="$jdir"
+    fi
+done
+export JAVA_HOME
+
+if [ -f "$DEFAULT" ]; then
+        . "$DEFAULT"
+fi
+
+# Prepare environment
+mkdir -p "$LOG_DIR" "$DATA_DIR" "$WORK_DIR" && chown -R "$ES_USER":"$ES_GROUP" "$LOG_DIR" "$DATA_DIR" "$WORK_DIR"
+touch "$PID_FILE" && chown "$ES_USER":"$ES_GROUP" "$PID_FILE"
+
+# Start Daemon
+exec chpst -u "$ES_USER":"$ES_GROUP" $DAEMON $DAEMON_OPTS

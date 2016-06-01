@@ -1,0 +1,21 @@
+#!/bin/sh
+
+exec 2>&1
+
+JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -XX:PermSize=128m -XX:MaxPermSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow"
+
+echo -n 'Waiting for Elasticsearch'
+until curl -s localhost:9200; do
+  echo -n '.'
+  sleep 1
+done
+echo ''
+
+echo '{ ping: 1 }' > ping.js
+echo -n 'Waiting for MongoDB'
+until mongo --quiet ping.js > /dev/null; do
+  sleep 1
+done
+echo ''
+
+exec java -Djava.library.path=/opt/graylog/lib/sigar $JAVA_OPTS -jar /opt/graylog/server/graylog.jar server --local -f /opt/graylog/graylog.conf -np
