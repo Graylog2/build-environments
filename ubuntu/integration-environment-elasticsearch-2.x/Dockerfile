@@ -3,7 +3,7 @@ MAINTAINER Marius Sturm <hello@graylog.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV MAVEN_VERSION 3.3.9
-ENV MONGODB_VERSION 3.0.8
+ENV MONGODB_VERSION 3.2.6
 ENV ELASTICSEARCH_VERSION 2.2.0
 
 RUN apt-get update && \
@@ -28,7 +28,7 @@ RUN apt-get update && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
     add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-trusty main" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2C52609D && \
-    echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list && \
+    echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
     mkdir -p /data/db && \
     apt-get update && \
