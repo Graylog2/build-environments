@@ -23,7 +23,8 @@ RUN apt-get update && \
     pip install Flask && \
     rm -rf /etc/service/sshd /etc/service/syslog-ng /etc/service/syslog-forwarder /etc/service/cron && \
     apt-get install -y --reinstall ca-certificates && \
-    add-apt-repository -y ppa:webupd8team/java && \
+    add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EEA14886 && \
     add-apt-repository "deb https://dl.bintray.com/sbt/debian /" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
     add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-trusty main" && \

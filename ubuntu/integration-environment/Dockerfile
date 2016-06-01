@@ -28,7 +28,8 @@ RUN apt-get install -y python-pip && \
 
 RUN apt-get install -y software-properties-common && \
     apt-get install -y --reinstall ca-certificates && \
-    add-apt-repository -y ppa:webupd8team/java && \
+    add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EEA14886 && \
     apt-get update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
     apt-get install -y oracle-java8-installer && \
