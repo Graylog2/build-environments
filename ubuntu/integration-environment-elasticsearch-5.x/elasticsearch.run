@@ -16,7 +16,7 @@ WORK_DIR=/tmp/$NAME
 CONF_DIR=/etc/$NAME
 PID_FILE=/var/run/$NAME/$NAME.pid
 DAEMON=$ES_HOME/bin/elasticsearch
-DAEMON_OPTS="-p $PID_FILE --default.path.home=$ES_HOME --default.path.logs=$LOG_DIR --default.path.data=$DATA_DIR --default.path.conf=$CONF_DIR"
+DAEMON_OPTS="-p $PID_FILE -E path.logs=$LOG_DIR -E path.data=$DATA_DIR -E path.conf=$CONF_DIR"
 
 JDK_DIRS="/usr/lib/jvm/java-8-oracle /usr/lib/jvm/j2sdk1.8-oracle /usr/lib/jvm/default-java"
 
