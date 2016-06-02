@@ -9,10 +9,11 @@ RUN wget -qO /tmp/elasticsearch.deb https://download.elastic.co/elasticsearch/el
     rm -f /tmp/elasticsearch.deb && \
     mkdir -p /etc/service/elasticsearch
 
+ADD run.sh /opt/graylog/run.sh
 ADD elasticsearch.run /etc/service/elasticsearch/run
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 
-RUN chmod +x /etc/service/elasticsearch/run
+RUN chmod +x /etc/service/elasticsearch/run /opt/graylog/run.sh
 
 VOLUME /home/jenkins/workspace
 VOLUME /home/jenkins/.m2
