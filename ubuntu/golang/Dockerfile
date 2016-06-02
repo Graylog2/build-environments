@@ -20,13 +20,16 @@ RUN apt-get update && \
     echo "jenkins:jenkins" | chpasswd && \
     echo "%jenkins ALL=NOPASSWD:ALL" > /etc/sudoers.d/jenkins && \
     chmod 0440 /etc/sudoers.d/jenkins && \
-    usermod -a -G sudo jenkins
+    usermod -a -G sudo jenkins && \
+    mkdir /home/jenkins/workspace && \
+    chown -R jenkins:jenkins /home/jenkins/workspace
 
 RUN apt-get install -y wget git mercurial && \
     wget -qO /tmp/go.tar.gz https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz && \
     tar -zxf /tmp/go.tar.gz -C /opt && \
     ln -s /opt/go/bin/* /usr/local/bin/ && \
-    mkdir -p /go/src/github.com/Graylog2
+    mkdir -p /go/src/github.com/Graylog2 && \
+    chown -R jenkins:jenkins /go
 
 RUN add-apt-repository -y ppa:masterminds/glide && \
     apt-get update -y && \
