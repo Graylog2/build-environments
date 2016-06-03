@@ -37,6 +37,7 @@ RUN apt-get install -y wget git mercurial build-essential autoconf libssl-dev &&
     tar -zxf /tmp/go.tar.gz -C /opt && \
     ln -s /opt/go/bin/* /usr/local/bin/ && \
     mkdir -p /go/src/github.com/Graylog2 && \
+    chown -R jenkins:jenkins /opt/go/pkg && \
     chown -R jenkins:jenkins /go
 
 RUN add-apt-repository -y ppa:masterminds/glide && \
