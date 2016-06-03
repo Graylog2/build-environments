@@ -17,7 +17,7 @@ then
 fi
 
 mkdir -p /opt/graylog/server
-tar -xzvf "$LATEST" -C /opt/graylog/server
+tar -xzvf "$LATEST" -C /opt/graylog/server --strip 1
 
 /sbin/my_init --no-kill-all-on-exit &
 
