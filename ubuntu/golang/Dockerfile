@@ -44,8 +44,8 @@ RUN add-apt-repository -y ppa:masterminds/glide && \
     apt-get update -y && \
     apt-get install -y glide
 
-RUN apt-get install -y ruby2.0-dev rpm nsis && \
-    gem install --no-rdoc --no-ri fpm-cookery
+RUN apt-get install -y ruby2.0 ruby2.0-dev rpm nsis && \
+    gem2.0 install --no-rdoc --no-ri fpm-cookery
 
 VOLUME /home/jenkins/workspace
 
