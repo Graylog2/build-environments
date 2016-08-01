@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 MAINTAINER Graylog, Inc. <hello@graylog.com>
 
-ENV GO_VERSION 1.6.2
+ENV GO_VERSION 1.6.3
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre/bin/java
