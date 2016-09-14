@@ -19,7 +19,14 @@ RUN apt-get update && \
     chown -R jenkins:jenkins /home/jenkins/workspace
 
 RUN apt-get install -y --reinstall ca-certificates && \
-    apt-get install -y wget curl unzip git mercurial build-essential autoconf libssl-dev && \
+    add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EEA14886 && \
+    apt-get update && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
+    apt-get install -y --force-yes oracle-java8-installer && \
+    update-java-alternatives -s java-8-oracle
+
+RUN apt-get install -y wget curl unzip git mercurial build-essential autoconf libssl-dev && \
     apt-add-repository ppa:brightbox/ruby-ng && \
     apt-get update && \
     apt-get install -y ruby2.1 ruby2.1-dev && \
