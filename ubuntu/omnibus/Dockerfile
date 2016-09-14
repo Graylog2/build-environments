@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y openssh-server sudo apt-utils software-properties-common apt-transport-https && \
+    apt-get install -y openssh-server sudo apt-utils software-properties-common apt-transport-https python-software-properties && \
     sed -i 's|session required pam_loginuid.so|session optional pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
     dpkg-reconfigure openssh-server && \
@@ -20,10 +20,11 @@ RUN apt-get update && \
 
 RUN apt-get install -y --reinstall ca-certificates && \
     apt-get install -y wget curl unzip git mercurial build-essential autoconf libssl-dev && \
-    apt-get install -y ruby2.0 ruby2.0-dev && \
-    gem2.0 install --no-rdoc --no-ri bundler && \
-    gem2.0 install --no-rdoc --no-ri omnibus && \
-    gem2.0 install --no-rdoc --no-ri docker-api
+    apt-add-repository ppa:brightbox/ruby-ng && \
+    apt-get update && \
+    apt-get install -y ruby2.1 ruby2.1-dev && \
+    gem install --no-rdoc --no-ri bundler && \
+    gem install --no-rdoc --no-ri docker-api
 
 VOLUME /home/jenkins/workspace
 
