@@ -44,6 +44,8 @@ RUN add-apt-repository -y ppa:masterminds/glide && \
     apt-get update -y && \
     apt-get install -y glide
 
+RUN apt-get install -y binutils-mingw-w64 gcc-mingw-w64
+
 RUN apt-get install -y ruby2.0 ruby2.0-dev rpm nsis && \
     gem2.0 install --no-rdoc --no-ri fpm-cookery
 
