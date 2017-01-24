@@ -32,7 +32,7 @@ RUN apt-get install -y --reinstall ca-certificates && \
     apt-get install -y --force-yes oracle-java8-installer && \
     update-java-alternatives -s java-8-oracle
 
-RUN apt-get install -y wget curl unzip git mercurial build-essential autoconf libssl-dev && \
+RUN apt-get install -y wget curl unzip git mercurial build-essential autoconf libssl-dev jq && \
     wget -qO /tmp/go.tar.gz https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz && \
     tar -zxf /tmp/go.tar.gz -C /opt && \
     ln -s /opt/go/bin/* /usr/local/bin/ && \
