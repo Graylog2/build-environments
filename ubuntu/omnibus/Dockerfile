@@ -29,7 +29,7 @@ RUN apt-get install -y --reinstall ca-certificates && \
 RUN apt-get install -y wget curl unzip git mercurial build-essential autoconf libssl-dev && \
     apt-add-repository ppa:brightbox/ruby-ng && \
     apt-get update && \
-    apt-get install -y ruby2.2 ruby2.2-dev && \
+    apt-get install -y ruby2.1 ruby2.1-dev && \
     gem install --no-rdoc --no-ri bundler && \
     gem install --no-rdoc --no-ri docker-api
 
