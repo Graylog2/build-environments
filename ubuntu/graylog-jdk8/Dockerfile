@@ -27,7 +27,7 @@ RUN apt-get update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
     apt-get install -y --force-yes oracle-java8-installer sbt docker-engine nodejs && \
     update-java-alternatives -s java-8-oracle && \
-    wget -qO /tmp/maven.tar.gz http://artfiles.org/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && \
+    wget -qO /tmp/maven.tar.gz http://artfiles.org/apache.org/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz && \
     mkdir /usr/local/maven && \
     tar -zxf /tmp/maven.tar.gz -C /usr/local/maven --strip-components=1 && \
     ln -s /usr/local/maven/bin/mvn /usr/bin/mvn && \
