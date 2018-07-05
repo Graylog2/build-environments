@@ -3,6 +3,7 @@ MAINTAINER Marius Sturm <hello@graylog.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre/bin/java
+ENV MAVEN_VERSION 3.5.4
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
@@ -19,15 +20,13 @@ RUN apt-get update && \
     apt-get install -y --reinstall ca-certificates && \
     add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EEA14886 && \
-    add-apt-repository "deb https://dl.bintray.com/sbt/debian /" && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
     add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-trusty main" && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2C52609D && \
     apt-get update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
-    apt-get install -y --force-yes oracle-java8-installer sbt docker-engine nodejs && \
+    apt-get install -y --force-yes oracle-java8-installer docker-engine && \
     update-java-alternatives -s java-8-oracle && \
-    wget -qO /tmp/maven.tar.gz http://artfiles.org/apache.org/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz && \
+    wget -qO /tmp/maven.tar.gz http://artfiles.org/apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     mkdir /usr/local/maven && \
     tar -zxf /tmp/maven.tar.gz -C /usr/local/maven --strip-components=1 && \
     ln -s /usr/local/maven/bin/mvn /usr/bin/mvn && \
