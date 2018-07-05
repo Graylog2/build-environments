@@ -44,10 +44,13 @@ RUN add-apt-repository -y ppa:masterminds/glide && \
     apt-get update -y && \
     apt-get install -y glide
 
-RUN apt-get install -y binutils-mingw-w64 gcc-mingw-w64
+RUN apt-get install -y binutils-mingw-w64 gcc-mingw-w64 rpm nsis
 
-RUN apt-get install -y ruby2.0 ruby2.0-dev rpm nsis && \
-    gem2.0 install --no-rdoc --no-ri fpm-cookery
+# Workaround for: https://bugs.launchpad.net/ubuntu/+source/ruby2.0/+bug/1777174
+RUN apt-get update && \
+    apt-get -y install ruby2.0=2.0.0.484-1ubuntu2 libruby2.0=2.0.0.484-1ubuntu2 libffi-dev ruby2.0-dev build-essential
+
+RUN ruby2.0 -S gem install --no-rdoc --no-ri fpm-cookery
 
 VOLUME /home/jenkins/workspace
 
