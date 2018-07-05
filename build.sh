@@ -16,12 +16,16 @@ do
     done
     if [ -d "${CONTAINER_NAME}" ]; then
       LEGACY_ID=$(docker images | grep $CONTAINER_NAME | awk '{print $3}')
+      echo "##################################################################"
+      echo "# Building environment for ${CONTAINER_NAME}"
+      echo "##################################################################"
+      docker build --force-rm=true -t ${CONTAINER_NAME} ${CONTAINER_NAME}
+
+      # Only delete the old image once the new one got successfully built
       if [[ ! -z "$LEGACY_ID" ]]; then
         echo "Delete existing image ${LEGACY_ID} - ${CONTAINER_NAME}"
         docker rmi -f ${CONTAINER_NAME} || true
       fi
-      echo "Building environment for ${CONTAINER_NAME}"
-      docker build --force-rm=true -t ${CONTAINER_NAME} ${CONTAINER_NAME}
     fi;
   done
 done
