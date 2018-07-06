@@ -24,7 +24,7 @@ do
       # Only delete the old image once the new one got successfully built
       if [[ ! -z "$LEGACY_ID" ]]; then
         echo "Delete existing image ${LEGACY_ID} - ${CONTAINER_NAME}"
-        docker rmi -f ${LEGACY_ID} || true
+        docker rmi -f ${CONTAINER_NAME} || true
       fi
     fi;
   done
