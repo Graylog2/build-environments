@@ -31,7 +31,8 @@ RUN apt-get update && \
     git config --global https.postBuffer 1048576000
 
 RUN cd /home/jenkins && \
-    git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+    git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git && \
+    chown -R jenkins.jenkins /home/jenkins/depot_tools
 
 VOLUME /home/jenkins/workspace
 
