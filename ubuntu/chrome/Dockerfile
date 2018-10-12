@@ -10,7 +10,7 @@ RUN apt-get update && \
     mkdir -p /var/run/sshd && \
     dpkg-reconfigure openssh-server && \
     groupadd -r jenkins && \
-    useradd -m -r -g jenkins jenkins && \
+    useradd -m -r -s /bin/bash -g jenkins jenkins && \
     echo "jenkins:jenkins" | chpasswd && \
     echo "%jenkins ALL=NOPASSWD:ALL" > /etc/sudoers.d/jenkins && \
     chmod 0440 /etc/sudoers.d/jenkins && \
