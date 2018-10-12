@@ -16,7 +16,7 @@ do
       cp ${file} "./${CONTAINER_NAME}/"
     done
     if [ -d "${CONTAINER_NAME}" ]; then
-      LEGACY_ID=$(docker images | grep $CONTAINER_NAME | awk '{print $3}')
+      LEGACY_ID=$(docker images | (grep $CONTAINER_NAME || true) | awk '{print $3}')
       echo "##################################################################"
       echo "# Building environment for ${CONTAINER_NAME}"
       echo "##################################################################"
