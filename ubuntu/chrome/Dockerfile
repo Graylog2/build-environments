@@ -10,7 +10,7 @@ RUN apt-get update && \
     mkdir -p /var/run/sshd && \
     dpkg-reconfigure openssh-server && \
     groupadd -r jenkins && \
-    useradd -m -r -s /bin/bash -g jenkins jenkins && \
+    useradd -m -r -g jenkins jenkins && \
     echo "jenkins:jenkins" | chpasswd && \
     echo "%jenkins ALL=NOPASSWD:ALL" > /etc/sudoers.d/jenkins && \
     chmod 0440 /etc/sudoers.d/jenkins && \
@@ -28,8 +28,7 @@ RUN apt-get install -y --reinstall ca-certificates && \
 
 RUN apt-get update && \
     apt-get install -y wget curl unzip git build-essential autoconf clang libssl-dev && \
-    git config --global https.postBuffer 1048576000 && \
-    echo "export PATH=$PATH:/home/jenkins/depot_tools" >> /etc/bash.bashrc
+    git config --global https.postBuffer 1048576000
 
 RUN cd /home/jenkins && \
     git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
