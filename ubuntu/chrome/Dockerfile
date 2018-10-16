@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:16.04
 MAINTAINER Graylog, Inc. <hello@graylog.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -18,16 +18,20 @@ RUN apt-get update && \
     mkdir /home/jenkins/workspace && \
     chown -R jenkins:jenkins /home/jenkins/workspace
 
+RUN echo Etc/UTC > /etc/timezone
+RUN echo tzdata tzdata/Areas select Etc | debconf-set-selections
+RUN echo tzdata tzdata/Zones/Etc UTC | debconf-set-selections
+RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+
 RUN apt-get install -y --reinstall ca-certificates && \
-    add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EEA14886 && \
+    add-apt-repository ppa:webupd8team/java && \
     apt-get update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
     apt-get install -y --force-yes oracle-java8-installer && \
     update-java-alternatives -s java-8-oracle
 
 RUN apt-get update && \
-    apt-get install -y wget curl unzip git build-essential autoconf clang libssl-dev && \
+    apt-get install -y lsb-base lsb-release sudo wget curl unzip git build-essential autoconf clang libssl-dev && \
     git config --global https.postBuffer 1048576000
 
 RUN cd /home/jenkins && \
