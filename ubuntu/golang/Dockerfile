@@ -1,7 +1,7 @@
-FROM ubuntu:trusty
+FROM ubuntu:bionic
 MAINTAINER Graylog, Inc. <hello@graylog.com>
 
-ENV GO_VERSION 1.10.3
+ENV GO_VERSION 1.11.2
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre/bin/java
@@ -25,8 +25,7 @@ RUN apt-get update && \
     chown -R jenkins:jenkins /home/jenkins/workspace
 
 RUN apt-get install -y --reinstall ca-certificates && \
-    add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EEA14886 && \
+    add-apt-repository ppa:webupd8team/java && \
     apt-get update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
     apt-get install -y --force-yes oracle-java8-installer && \
@@ -40,17 +39,13 @@ RUN apt-get install -y wget curl unzip git mercurial build-essential autoconf li
     chown -R jenkins:jenkins /opt/go/pkg && \
     chown -R jenkins:jenkins /go
 
-RUN add-apt-repository -y ppa:masterminds/glide && \
-    apt-get update -y && \
-    apt-get install -y glide
+RUN apt-get install -y golang-glide
 
 RUN apt-get install -y binutils-mingw-w64 gcc-mingw-w64 rpm nsis
 
-# Workaround for: https://bugs.launchpad.net/ubuntu/+source/ruby2.0/+bug/1777174
-RUN apt-get update && \
-    apt-get -y install ruby2.0=2.0.0.484-1ubuntu2 libruby2.0=2.0.0.484-1ubuntu2 libffi-dev ruby2.0-dev build-essential
+RUN apt-get -y install ruby libruby libffi-dev ruby-dev build-essential
 
-RUN ruby2.0 -S gem install --no-rdoc --no-ri fpm-cookery
+RUN ruby -S gem install --no-rdoc --no-ri fpm-cookery
 
 VOLUME /home/jenkins/workspace
 
