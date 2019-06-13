@@ -19,6 +19,8 @@ RUN apt-get update && \
     mkdir /home/jenkins/workspace && \
     chown -R jenkins:jenkins /home/jenkins/workspace
 
+RUN apt-get install -y wget git
+
 RUN npm install -g yarn@$YARN_VERSION
 
 VOLUME /home/jenkins/workspace
