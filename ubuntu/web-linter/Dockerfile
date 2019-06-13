@@ -4,6 +4,8 @@ MAINTAINER Graylog, Inc. <hello@graylog.com>
 
 ENV YARN_VERSION 1.12.3
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # We need a JDK for the Jenkins agent. Otherwise Jenkins would upload a
 # complete JDK every time the container runs.
 RUN apt-get update && \
