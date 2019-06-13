@@ -4,9 +4,11 @@ MAINTAINER Graylog, Inc. <hello@graylog.com>
 
 ENV YARN_VERSION 1.12.3
 
+# We need a JDK for the Jenkins agent. Otherwise Jenkins would upload a
+# complete JDK every time the container runs.
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y openssh-server sudo apt-utils software-properties-common apt-transport-https && \
+    apt-get install -y openssh-server sudo apt-utils software-properties-common apt-transport-https openjdk-8-jre-headless && \
     sed -i 's|session required pam_loginuid.so|session optional pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
     dpkg-reconfigure openssh-server && \
