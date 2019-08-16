@@ -26,7 +26,7 @@ do
 
       if [[ -n "$LEGACY_ID" && "$LEGACY_ID" != "$NEW_ID" ]]; then
         echo "Delete old image ${LEGACY_ID} - ${CONTAINER_NAME} (replaced by: ${NEW_ID})"
-        docker rmi -f ${CONTAINER_NAME} || true
+        docker rmi -f ${LEGACY_ID} || true
       fi
     fi;
   done
