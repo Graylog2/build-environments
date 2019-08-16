@@ -1,7 +1,7 @@
 FROM ubuntu:bionic
 MAINTAINER Graylog, Inc. <hello@graylog.com>
 
-ENV GO_VERSION 1.11.4
+ENV GO_VERSION 1.11.13
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre/bin/java
